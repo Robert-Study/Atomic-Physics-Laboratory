@@ -26,10 +26,10 @@ Each region was fitted with a sum of Lorentzians and a polynomial background. Re
 
 | Reported quantity | ⁸⁵Rb | ⁸⁷Rb |
 | --- | ---: | ---: |
-| Ground-state magnetic-dipole constant A | 1005.7 ± 15.1 MHz | 3416.1 ± 5.1 MHz |
-| Excited-state magnetic-dipole constant A | 25.9 ± 1.3 MHz | 86.7 ± 2.7 MHz |
-| Excited-state electric-quadrupole constant B | 28.4 ± 2.8 MHz | 14.6 ± 2.9 MHz |
-| Hyperfine resonance linewidth | 9.70 ± 0.20 MHz | 11.25 ± 0.01 MHz |
+| Ground-state magnetic-dipole constant A | 1006 ± 15 MHz | 3416 ± 5 MHz |
+| Excited-state magnetic-dipole constant A | 26 ± 1 MHz | 87 ± 3 MHz |
+| Excited-state electric-quadrupole constant B | 28 ± 3 MHz | 15 ± 3 MHz |
+| Hyperfine resonance linewidth | 9.7 ± 0.2 MHz | 11.25 ± 0.01 MHz |
 
 The report examines frequency-sweep nonlinearity of approximately **1.5 ± 0.3%**, alongside calibration, alignment and power broadening. The quoted values and uncertainties come from the original laboratory analysis.
 
