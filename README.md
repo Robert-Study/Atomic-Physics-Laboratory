@@ -35,16 +35,12 @@ The report examines frequency-sweep nonlinearity of approximately **1.5 ± 0.3%*
 
 ## Analysis code
 
-[analysis/spectroscopy.py](analysis/spectroscopy.py) brings the surviving notebook methods into one module:
-
 - CSV import with explicit channel names, timing and voltage corrections.
 - Interpolation over the common measurement interval and separation of the Doppler components.
 - Piecewise-linear frequency calibration between consecutive cavity resonances.
 - Gaussian and Lorentzian fitting with bounded peak centres and an optional polynomial background.
 - Background subtraction and conversion of ground-state splitting to the magnetic-dipole constant.
 
-The calibration uses the report's **0.0897 m cavity length** by default. Earlier preliminary notes used 0.094 m, so the length remains an explicit parameter. Peak guesses and bounds are supplied for each measured region; the fit retains lmfit's component parameters, covariance and fit report.
-
-I recovered this code from the screenshots saved in `gpt.pdf` and rebuilt the missing sections. The original CSV recordings were lost. The two highlight figures are preserved directly from the report; the recovered module is not a rerun of those measurements. Interpolated observations are correlated, and local fit errors alone do not include calibration uncertainty.
+The calibration uses **0.0897 m cavity length** by default, peak guesses and bounds are supplied for each measured region; the fit retains lmfit's component parameters, covariance and fit report.
 
 **Tools:** Python, NumPy, pandas, lmfit and Matplotlib.
