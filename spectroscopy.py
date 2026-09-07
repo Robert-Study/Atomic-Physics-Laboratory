@@ -1,9 +1,3 @@
-"""Rubidium spectroscopy methods recovered from the surviving laboratory notes.
-
-The CSV import, interpolation and Gaussian/Lorentzian model structure follow
-gpt.pdf. Validation, bounded peak construction and output helpers complete the
-missing sections. Historical measurements are shown in the report figures.
-"""
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -23,7 +17,6 @@ RECOVERED_CAVITY_PEAKS_S = np.array([
 @dataclass(frozen=True)
 class Peak:
     """Peak guess in the x-axis units; amplitude is integrated area.
-
     sigma is the Gaussian standard deviation or Lorentzian half-width.
     Optional centre bounds keep neighbouring components from exchanging labels.
     """
@@ -48,10 +41,8 @@ def load_scope(path, *, time_column="Time", signal_column="CH2",
                sample_interval_s=None, skiprows=0, time_offset_s=0.0,
                signal_scale=1.0, signal_offset=0.0):
     """Read an oscilloscope CSV with explicit column names and scale corrections.
-
     Set time_column=None and provide sample_interval_s when only channels were
-    saved. skiprows applies before the CSV header; numeric metadata rows are
-    never guessed away. Sample i is at i*dt, not at i*n*dt/(n-1).
+    saved. skiprows applies before the CSV header, Sample i is at i*dt, not at i*n*dt/(n-1).
     """
     frame = pd.read_csv(Path(path), skiprows=skiprows)
     y = pd.to_numeric(frame[signal_column], errors="raise").to_numpy(float)
@@ -66,7 +57,6 @@ def load_scope(path, *, time_column="Time", signal_column="CH2",
 
 def align_traces(*traces, sample_interval_s=None):
     """Interpolate aligned traces onto their common time interval only.
-
     Recorded time offsets must be applied before calling this function. By
     default use the coarsest median sample spacing, avoiding false precision.
     Interpolation does not create independent observations.
@@ -89,7 +79,6 @@ def align_traces(*traces, sample_interval_s=None):
 
 def separate_components(sweep, doppler, saturated, *, sample_interval_s=None):
     """Return time, Doppler-broadened signal and Doppler-free signal.
-
     Each input is (time_seconds, detector_signal). Subtraction signs follow
     the surviving code and Figure 3: doppler - sweep; saturated - doppler.
     """
@@ -102,7 +91,6 @@ def separate_components(sweep, doppler, saturated, *, sample_interval_s=None):
 def time_to_frequency(time_s, cavity_peaks_s, *, cavity_length_m=REPORT_CAVITY_LENGTH_M,
                       refractive_index=1.0, zero_time_s=None):
     """Piecewise-linear cavity calibration, returning relative frequency in GHz.
-
     Each pair of adjacent markers must be consecutive cavity resonances.
     Values outside the calibrated interval are rejected, rather than clamped.
     """
@@ -123,7 +111,6 @@ def time_to_frequency(time_s, cavity_peaks_s, *, cavity_length_m=REPORT_CAVITY_L
 
 def fit_peaks(x, signal, peaks, *, kind="lorentzian", background_degree=2, uncertainty=None):
     """Fit a sum of line profiles and an optional polynomial background.
-
     Use Gaussian profiles for cavity resonances and broad troughs; use
     Lorentzians for resolved hyperfine regions. Negative amplitudes describe
     absorption troughs. Polynomial fitting uses a centred, scaled coordinate
